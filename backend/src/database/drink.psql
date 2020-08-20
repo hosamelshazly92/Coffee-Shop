@@ -1,0 +1,8 @@
+DELETE FROM drink;
+ALTER SEQUENCE drink_id_seq RESTART WITH 1;
+
+INSERT INTO
+drink (id, title, recipe)
+VALUES
+(1, '{"color":brown, "name":espresso, "parts":1}', 'coffee'),
+(2, '{"color":beige, "name":latte, "parts":2}', 'milk');

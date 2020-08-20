@@ -2,10 +2,13 @@ import os
 from sqlalchemy import Column, String, Integer
 from flask_sqlalchemy import SQLAlchemy
 import json
+import psycopg2
 
-database_filename = "database.db"
+database_filename = "coffee"
 project_dir = os.path.dirname(os.path.abspath(__file__))
-database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+# database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+database_path = "postgres://admin:0008@{}/{}".format(
+    'localhost:5432', database_filename)
 
 db = SQLAlchemy()
 
@@ -39,7 +42,7 @@ class Drink(db.Model):
     # String Title
     title = Column(String(80), unique=True)
     # the ingredients blob - this stores a lazy json blob
-    # the required datatype is [{'color': string, 'name':string, 'parts':number}]
+    # the required datatype is [{'color':string, 'name':string, 'parts':number}]
     recipe =  Column(String(180), nullable=False)
 
     '''
