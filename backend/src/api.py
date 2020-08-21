@@ -71,6 +71,29 @@ def get_drinks_detail():
         or appropriate status code indicating reason for failure
 '''
 
+@app.route('/add', methods=['POST'])
+def add_drinks():
+
+    body = request.get_json()
+
+    title = body.get('title', None)
+    print(f'==========> {type(title)}: {title}')
+    get_recipe = body.get('recipe', None)
+    recipe = str(get_recipe)
+    print(f'==========> {type(recipe)}: {recipe}')
+
+    try:
+        drink = Drink(title=title, recipe=recipe)
+
+        drink.insert()
+
+        return jsonify({
+            "success": True,
+            "drinks": drink
+        })
+
+    except Exception:
+        abort(422)
 
 '''
 @TODO implement endpoint
