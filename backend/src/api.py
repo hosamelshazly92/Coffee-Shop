@@ -50,6 +50,16 @@ def get_drinks():
         or appropriate status code indicating reason for failure
 '''
 
+@app.route('/drinks_detail')
+def get_drinks_detail():
+
+    drink = Drink.query.order_by(Drink.id).all()
+    drinks = [i.long() for i in drink]
+
+    return jsonify({
+        "success": True,
+        "drinks": drinks
+    })
 
 '''
 @TODO implement endpoint
