@@ -22,7 +22,7 @@ CORS(app)
 
 ## ROUTES
 '''
-@TODO implement endpoint
+@TODO_DONE implement endpoint
     GET /drinks
         it should be a public endpoint
         it should contain only the drink.short() data representation
@@ -42,7 +42,7 @@ def get_drinks():
     })
 
 '''
-@TODO implement endpoint
+@TODO_DONE implement endpoint
     GET /drinks-detail
         it should require the 'get:drinks-detail' permission
         it should contain the drink.long() data representation
@@ -62,7 +62,7 @@ def get_drinks_detail():
     })
 
 '''
-@TODO implement endpoint
+@TODO_DONE implement endpoint
     POST /drinks
         it should create a new row in the drinks table
         it should require the 'post:drinks' permission
@@ -94,7 +94,7 @@ def add_drinks():
         abort(422)
 
 '''
-@TODO implement endpoint
+@TODO_DONE implement endpoint
     PATCH /drinks/<id>
         where <id> is the existing model id
         it should respond with a 404 error if <id> is not found
@@ -134,7 +134,7 @@ def edit_drinks(drink_id):
         abort(422)
 
 '''
-@TODO implement endpoint
+@TODO_DONE implement endpoint
     DELETE /drinks/<id>
         where <id> is the existing model id
         it should respond with a 404 error if <id> is not found
@@ -171,10 +171,10 @@ Example error handling for unprocessable entity
 @app.errorhandler(422)
 def unprocessable(error):
     return jsonify({
-                    "success": False, 
-                    "error": 422,
-                    "message": "unprocessable"
-                    }), 422
+        "success": False, 
+        "error": 422,
+        "message": "unprocessable"
+    }), 422
 
 '''
 @TODO implement error handlers using the @app.errorhandler(error) decorator
@@ -188,10 +188,17 @@ def unprocessable(error):
 '''
 
 '''
-@TODO implement error handler for 404
+@TODO_DONE implement error handler for 404
     error handler should conform to general task above 
 '''
 
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        'success': False,
+        'error': 404,
+        'message': "resource not found"
+    }), 404
 
 '''
 @TODO implement error handler for AuthError
