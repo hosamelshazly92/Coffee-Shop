@@ -74,20 +74,20 @@ def get_drinks_detail():
 @app.route('/add', methods=['POST'])
 def add_drinks():
 
-    body = request.get_json()
-
-    title = body.get('title', None)
-    get_recipe = body.get('recipe', None)
-    recipe = str(get_recipe)
-
     try:
+        body = request.get_json()
+
+        title = body.get('title', None)
+        get_recipe = body.get('recipe', None)
+        recipe = json.dumps(get_recipe)
+
         drink = Drink(title=title, recipe=recipe)
 
         drink.insert()
 
         return jsonify({
             "success": True,
-            "drinks": drink
+            "drinks": drink.title
         })
 
     except Exception:
@@ -108,28 +108,30 @@ def add_drinks():
 @app.route('/edit/<int:drink_id>', methods=['PATCH'])
 def edit_drinks(drink_id):
 
-    body = request.get_json()
-
-    get_title = body.get('title', None)
-    dict_recipe = body.get('recipe', None)
-    get_recipe = str(dict_recipe)
-
     try:
+        body = request.get_json()
+
+        title = body.get('title', None)
+        get_recipe = body.get('recipe', None)
+        recipe = json.dumps(get_recipe)
 
         drink = Drink.query.get(drink_id)
 
-        drink.title = get_title
-        drink.recipe = get_recipe
+        if drink is None:
+            abort(404)
+
+        drink.title = title
+        drink.recipe = recipe
 
         drink.insert()
 
         return jsonify({
             "success": True,
-            "drinks": drink
+            "drinks": title
         })
 
     except Exception:
-        abort(404)
+        abort(422)
 
 '''
 @TODO implement endpoint
@@ -142,6 +144,25 @@ def edit_drinks(drink_id):
         or appropriate status code indicating reason for failure
 '''
 
+@app.route('/delete//<int:drink_id>', methods=['DELETE'])
+def delete_drinks(drink_id):
+
+    drink = Drink.query.get(drink_id)
+
+    if drink is None:
+        abort(404)
+
+    drink.delete()
+
+    try:
+        
+        return jsonify({
+            "success": True,
+            "delete": drink_id
+        })
+
+    except Exception:
+        abort(422)
 
 ## Error Handling
 '''

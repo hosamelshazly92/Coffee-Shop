@@ -4,24 +4,24 @@ ALTER SEQUENCE drink_id_seq RESTART WITH 1;
 INSERT INTO
 drink (id, title, recipe)
 VALUES
-(1, 'black coffee', '{"color":"black", "name":"black", "parts":1}'),
-(2, 'coffee', '{"color":"brown", "name":"espresso", "parts":1}'),
-(3, 'milk', '{"color":"beige", "name":"latte", "parts":2}');
+(1, 'black coffee', '{"color": "black", "name": "black", "parts": 1}'),
+(2, 'coffee', '{"color": "brown", "name": "espresso", "parts": 1}'),
+(3, 'milk', '{"color": "beige", "name": "latte", "parts": 2}');
 
-{
-    "recipe": {
-        "color": "white",
-        "name": "french",
-        "parts": 1
-    },
-    "title": "french"
-}
+-- {
+--     "recipe": {
+--         "color": "white",
+--         "name": "french",
+--         "parts": 1
+--     },
+--     "title": "french"
+-- }
 
-{
-    "recipe": {
-        "color": "brown",
-        "name": "cappuccino",
-        "parts": 2
-    },
-    "title": "cappuccino"
-}
+-- {
+--     "recipe": {
+--         "color": "brown",
+--         "name": "cappuccino",
+--         "parts": 2
+--     },
+--     "title": "cappuccino"
+-- }
