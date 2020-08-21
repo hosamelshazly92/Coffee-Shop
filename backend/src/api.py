@@ -77,10 +77,8 @@ def add_drinks():
     body = request.get_json()
 
     title = body.get('title', None)
-    print(f'==========> {type(title)}: {title}')
     get_recipe = body.get('recipe', None)
     recipe = str(get_recipe)
-    print(f'==========> {type(recipe)}: {recipe}')
 
     try:
         drink = Drink(title=title, recipe=recipe)
@@ -107,6 +105,31 @@ def add_drinks():
         or appropriate status code indicating reason for failure
 '''
 
+@app.route('/edit/<int:drink_id>', methods=['PATCH'])
+def edit_drinks(drink_id):
+
+    body = request.get_json()
+
+    get_title = body.get('title', None)
+    dict_recipe = body.get('recipe', None)
+    get_recipe = str(dict_recipe)
+
+    try:
+
+        drink = Drink.query.get(drink_id)
+
+        drink.title = get_title
+        drink.recipe = get_recipe
+
+        drink.insert()
+
+        return jsonify({
+            "success": True,
+            "drinks": drink
+        })
+
+    except Exception:
+        abort(404)
 
 '''
 @TODO implement endpoint
