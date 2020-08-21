@@ -177,7 +177,7 @@ def unprocessable(error):
     }), 422
 
 '''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
+@TODO_DONE implement error handlers using the @app.errorhandler(error) decorator
     each error handler should return (with approprate messages):
              jsonify({
                     "success": False, 
@@ -201,7 +201,7 @@ def not_found(error):
     }), 404
 
 '''
-@TODO implement error handler for AuthError
+@TODO_DONE implement error handler for AuthError
     error handler should conform to general task above 
 '''
 
@@ -212,3 +212,11 @@ def unauthorized(error):
         'error': 401,
         'message': "unauthorized"
     }), 401
+
+@app.errorhandler(403)
+def forbidden(error):
+    return jsonify({
+        'success': False,
+        'error': 403,
+        'message': "forbidden"
+    }), 403
