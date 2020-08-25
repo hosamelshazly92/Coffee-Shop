@@ -31,6 +31,7 @@ CORS(app)
 '''
 
 @app.route('/drinks')
+# @requires_auth
 def get_drinks():
 
     drink = Drink.query.order_by(Drink.id).all()
