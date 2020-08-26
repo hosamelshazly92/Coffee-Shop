@@ -109,7 +109,7 @@ def add_drinks(token):
 
 @app.route('/edit/<int:drink_id>', methods=['PATCH'])
 @requires_auth(['patch:drinks'])
-def edit_drinks(drink_id):
+def edit_drinks(token, drink_id):
 
     try:
         body = request.get_json()
@@ -149,7 +149,7 @@ def edit_drinks(drink_id):
 
 @app.route('/delete/<int:drink_id>', methods=['DELETE'])
 @requires_auth(['delete:drinks'])
-def delete_drinks(drink_id):
+def delete_drinks(token, drink_id):
 
     drink = Drink.query.get(drink_id)
 
