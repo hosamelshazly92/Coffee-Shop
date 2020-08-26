@@ -51,6 +51,7 @@ def get_drinks():
 '''
 
 @app.route('/drinks_detail')
+@requires_auth(['get:drinks_detail'])
 def get_drinks_detail():
 
     drink = Drink.query.order_by(Drink.id).all()
@@ -72,6 +73,7 @@ def get_drinks_detail():
 '''
 
 @app.route('/add', methods=['POST'])
+@requires_auth(['post:drinks'])
 def add_drinks():
 
     try:
@@ -106,6 +108,7 @@ def add_drinks():
 '''
 
 @app.route('/edit/<int:drink_id>', methods=['PATCH'])
+@requires_auth(['patch:drinks'])
 def edit_drinks(drink_id):
 
     try:
@@ -145,6 +148,7 @@ def edit_drinks(drink_id):
 '''
 
 @app.route('/delete//<int:drink_id>', methods=['DELETE'])
+@requires_auth(['delete:drinks'])
 def delete_drinks(drink_id):
 
     drink = Drink.query.get(drink_id)
@@ -205,14 +209,6 @@ def not_found(error):
     error handler should conform to general task above 
 '''
 
-@app.errorhandler(401)
-def unauthorized(error):
-    return jsonify({
-        'success': False,
-        'error': 401,
-        'message': "unauthorized"
-    }), 401
-
 @app.errorhandler(403)
 def forbidden(error):
     return jsonify({
@@ -220,3 +216,11 @@ def forbidden(error):
         'error': 403,
         'message': "forbidden"
     }), 403
+
+@app.errorhandler(401)
+def unauthorized(error):
+    return jsonify({
+        'success': False,
+        'error': 401,
+        'message': "unauthorized"
+    }), 401
