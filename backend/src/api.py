@@ -52,7 +52,7 @@ def get_drinks():
 
 @app.route('/drinks_detail')
 @requires_auth(['get:drinks_detail'])
-def get_drinks_detail():
+def get_drinks_detail(token):
 
     drink = Drink.query.order_by(Drink.id).all()
     drinks = [i.long() for i in drink]
@@ -74,7 +74,7 @@ def get_drinks_detail():
 
 @app.route('/add', methods=['POST'])
 @requires_auth(['post:drinks'])
-def add_drinks():
+def add_drinks(token):
 
     try:
         body = request.get_json()
@@ -147,7 +147,7 @@ def edit_drinks(drink_id):
         or appropriate status code indicating reason for failure
 '''
 
-@app.route('/delete//<int:drink_id>', methods=['DELETE'])
+@app.route('/delete/<int:drink_id>', methods=['DELETE'])
 @requires_auth(['delete:drinks'])
 def delete_drinks(drink_id):
 
