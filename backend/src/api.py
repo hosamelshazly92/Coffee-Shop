@@ -224,3 +224,11 @@ def unauthorized(error):
         'error': 401,
         'message': "unauthorized"
     }), 401
+
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        'success': False,
+        'error': 400,
+        'message': "bad request"
+    }), 400
