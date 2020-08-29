@@ -22,6 +22,7 @@ class AuthError(Exception):
 
 # Auth Header
 
+
 '''
 @TODO_DONE implement get_token_auth_header() method
     it should attempt to get the header from the request
@@ -47,6 +48,7 @@ def get_token_auth_header():
 
     return header_parts[1]
 
+
 '''
 @TODO_DONE implement check_permissions(permission, payload) method
     @INPUTS
@@ -69,6 +71,7 @@ def check_permissions(permissions, payload):
             abort(403)
 
     return True
+
 
 '''
 @TODO_DONE implement verify_decode_jwt(token) method
@@ -145,6 +148,7 @@ def verify_decode_jwt(token):
                 'description': 'Unable to find the appropriate key.'
     }, 400)
 
+
 '''
 @TODO_DONE implement @requires_auth(permission) decorator method
     @INPUTS
@@ -165,7 +169,7 @@ def requires_auth(permissions=[]):
             token = get_token_auth_header()
             try:
                 payload = verify_decode_jwt(token)
-            except:
+            except exception:
                 abort(401)
 
             check_permissions(permissions, payload)

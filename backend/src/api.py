@@ -43,6 +43,7 @@ def get_drinks():
         "drinks": drinks
     })
 
+
 '''
 @TODO_DONE implement endpoint
     GET /drinks-detail
@@ -65,6 +66,7 @@ def get_drinks_detail(token):
         "success": True,
         "drinks": drinks
     })
+
 
 '''
 @TODO_DONE implement endpoint
@@ -100,6 +102,7 @@ def add_drinks(token):
 
     except Exception:
         abort(422)
+
 
 '''
 @TODO_DONE implement endpoint
@@ -144,6 +147,7 @@ def edit_drinks(token, drink_id):
     except Exception:
         abort(422)
 
+
 '''
 @TODO_DONE implement endpoint
     DELETE /drinks/<id>
@@ -178,6 +182,7 @@ def delete_drinks(token, drink_id):
     except Exception:
         abort(422)
 
+
 # Error Handling
 '''
 Example error handling for unprocessable entity
@@ -191,6 +196,7 @@ def unprocessable(error):
         "error": 422,
         "message": "unprocessable"
     }), 422
+
 
 '''
 @TODO_DONE implement error handlers using the @app.errorhandler(error)
@@ -216,6 +222,7 @@ def not_found(error):
         'error': 404,
         'message': "resource not found"
     }), 404
+
 
 '''
 @TODO_DONE implement error handler for AuthError
